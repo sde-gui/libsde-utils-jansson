@@ -33,24 +33,24 @@ typedef struct _su_enum_pair {
 
 extern su_enum_pair bool_pair[];
 
-int str2num(const su_enum_pair *_p, const char * str, int defval);
-const char * num2str(const su_enum_pair * p, int num, const char * defval);
+int su_str_to_enum(const su_enum_pair *_p, const char * str, int defval);
+const char * su_enum_to_str(const su_enum_pair * p, int num, const char * defval);
 
 /******************************************************************************/
 
 int      su_json_dot_get_enum(json_t * json, const char * key, const su_enum_pair * pairs, int default_value);
 int      su_json_dot_get_int(json_t * json, const char * key, int default_value);
 gboolean su_json_dot_get_bool(json_t * json, const char * key, gboolean default_value);
-void su_json_dot_get_color(json_t * json, const char * key, const GdkColor * default_value, GdkColor * result);
-void su_json_dot_get_rgba(json_t * json, const char * key, const GdkRGBA * default_value, GdkRGBA * result);
-void su_json_dot_get_string(json_t * json, const char * key, const char * default_value, char ** result);
+void     su_json_dot_get_color(json_t * json, const char * key, const GdkColor * default_value, GdkColor * result);
+void     su_json_dot_get_rgba(json_t * json, const char * key, const GdkRGBA * default_value, GdkRGBA * result);
+void     su_json_dot_get_string(json_t * json, const char * key, const char * default_value, char ** result);
 
-void su_json_dot_set_enum(json_t * json, const char * key, const su_enum_pair * pairs, int value);
-void su_json_dot_set_int(json_t * json, const char * key, int value);
-void su_json_dot_set_bool(json_t * json, const char * key, gboolean value);
-void su_json_dot_set_color(json_t * json, const char * key, const GdkColor * value);
-void su_json_dot_set_rgba(json_t * json, const char * key, const GdkRGBA * value);
-void su_json_dot_set_string(json_t * json, const char * key, const char * value);
+void     su_json_dot_set_enum(json_t * json, const char * key, const su_enum_pair * pairs, int value);
+void     su_json_dot_set_int(json_t * json, const char * key, int value);
+void     su_json_dot_set_bool(json_t * json, const char * key, gboolean value);
+void     su_json_dot_set_color(json_t * json, const char * key, const GdkColor * value);
+void     su_json_dot_set_rgba(json_t * json, const char * key, const GdkRGBA * value);
+void     su_json_dot_set_string(json_t * json, const char * key, const char * value);
 
 
 typedef enum {

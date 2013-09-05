@@ -20,6 +20,27 @@
 
 /********************************************************************/
 
+static guint32 gcolor2rgb24(const GdkColor *color)
+{
+    guint32 i;
+    guint16 r, g, b;
+
+    r = color->red * 0xFF / 0xFFFF;
+    g = color->green * 0xFF / 0xFFFF;
+    b = color->blue * 0xFF / 0xFFFF;
+
+    i = r & 0xFF;
+    i <<= 8;
+    i |= g & 0xFF;
+    i <<= 8;
+    i |= b & 0xFF;
+
+    return i;
+}
+
+
+/********************************************************************/
+
 su_enum_pair bool_pair[] = {
     { 0, "false" },
     { 1, "true" },
@@ -30,8 +51,7 @@ su_enum_pair bool_pair[] = {
 
 /********************************************************************/
 
-int
-str2num(const su_enum_pair *_p, const char * str, int defval)
+int su_str_to_enum(const su_enum_pair *_p, const char * str, int defval)
 {
     const su_enum_pair * p;
 
@@ -56,8 +76,7 @@ str2num(const su_enum_pair *_p, const char * str, int defval)
     return defval;
 }
 
-const char *
-num2str(const su_enum_pair * p, int num, const char * defval)
+const char * su_enum_to_str(const su_enum_pair * p, int num, const char * defval)
 {
     for (;p && p->str; p++) {
         if (num == p->num)
@@ -77,7 +96,7 @@ int su_json_dot_get_enum(json_t * json, const char * key, const su_enum_pair * p
     if (!json_is_string(json_value))
         return default_value;
 
-    return str2num(pairs, json_string_value(json_value), default_value);
+    return su_str_to_enum(pairs, json_string_value(json_value), default_value);
 }
 
 int su_json_dot_get_int(json_t * json, const char * key, int default_value)
@@ -172,7 +191,7 @@ end:
 
 void su_json_dot_set_enum(json_t * json, const char * key, const su_enum_pair * pairs, int value)
 {
-    json_object_set_new_nocheck(json, key, json_string(num2str(pairs, value, "")));
+    json_object_set_new_nocheck(json, key, json_string(su_enum_to_str(pairs, value, "")));
 }
 
 void su_json_dot_set_int(json_t * json, const char * key, int value)

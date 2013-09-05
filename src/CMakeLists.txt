@@ -1,3 +1,12 @@
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+if(ENABLE_WERROR)
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Werror")
+endif()
+
+#if(ENABLE_AS_NEEDED)
+#    set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--as-needed ${CMAKE_SHARED_LINKER_FLAGS}")
+#endif()
+
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(gtk2 REQUIRED gtk+-2.0>=2.24)
