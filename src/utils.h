@@ -20,17 +20,32 @@
 #define __SDE_UTILS_JANSSON__UTILS_H
 
 #include <glib.h>
+#include <gtk/gtk.h>
+#include "gdkrgba.h"
 #include <jansson.h>
 
+/******************************************************************************/
 
-int      su_json_dot_get_enum(json_t * json, const char * key, const pair * pairs, int default_value);
+typedef struct _su_enum_pair {
+    int num;
+    char * str;
+} su_enum_pair;
+
+extern su_enum_pair bool_pair[];
+
+int str2num(const su_enum_pair *_p, const char * str, int defval);
+const char * num2str(const su_enum_pair * p, int num, const char * defval);
+
+/******************************************************************************/
+
+int      su_json_dot_get_enum(json_t * json, const char * key, const su_enum_pair * pairs, int default_value);
 int      su_json_dot_get_int(json_t * json, const char * key, int default_value);
 gboolean su_json_dot_get_bool(json_t * json, const char * key, gboolean default_value);
 void su_json_dot_get_color(json_t * json, const char * key, const GdkColor * default_value, GdkColor * result);
 void su_json_dot_get_rgba(json_t * json, const char * key, const GdkRGBA * default_value, GdkRGBA * result);
 void su_json_dot_get_string(json_t * json, const char * key, const char * default_value, char ** result);
 
-void su_json_dot_set_enum(json_t * json, const char * key, const pair * pairs, int value);
+void su_json_dot_set_enum(json_t * json, const char * key, const su_enum_pair * pairs, int value);
 void su_json_dot_set_int(json_t * json, const char * key, int value);
 void su_json_dot_set_bool(json_t * json, const char * key, gboolean value);
 void su_json_dot_set_color(json_t * json, const char * key, const GdkColor * value);
@@ -51,7 +66,7 @@ typedef struct {
     su_json_type_t type;
     void * structure_offset;
     const char * key;
-    const pair * pairs;
+    const su_enum_pair * pairs;
 } su_json_option_definition;
 
 #define SU_JSON_OPTION(type, name) \
@@ -76,7 +91,5 @@ void su_json_write_options(json_t * json, su_json_option_definition * options, v
 #endif
 
 /******************************************************************************/
-
-
 
 #endif

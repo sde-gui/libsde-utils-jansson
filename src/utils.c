@@ -20,8 +20,55 @@
 
 /********************************************************************/
 
+su_enum_pair bool_pair[] = {
+    { 0, "false" },
+    { 1, "true" },
+    { 0, "0" },
+    { 1, "1" },
+    { 0, NULL },
+};
 
-int su_json_dot_get_enum(json_t * json, const char * key, const pair * pairs, int default_value)
+/********************************************************************/
+
+int
+str2num(const su_enum_pair *_p, const char * str, int defval)
+{
+    const su_enum_pair * p;
+
+    for (p = _p; p && p->str; p++) {
+        if (!g_ascii_strcasecmp(str, p->str))
+            return p->num;
+    }
+
+    const gchar * s;
+    for (s = str; *s; s++) {
+        if (*s < '0' || *s > '9')
+            return defval;
+    }
+
+    int num = atoi(str);
+
+    for (p = _p; p && p->str; p++) {
+        if (p->num == num)
+            return p->num;
+    }
+
+    return defval;
+}
+
+const char *
+num2str(const su_enum_pair * p, int num, const char * defval)
+{
+    for (;p && p->str; p++) {
+        if (num == p->num)
+            return p->str;
+    }
+    return defval;
+}
+
+/********************************************************************/
+
+int su_json_dot_get_enum(json_t * json, const char * key, const su_enum_pair * pairs, int default_value)
 {
     json_t * json_value = json_object_get(json, key);
     if (!json_value)
@@ -123,7 +170,7 @@ end:
     }
 }
 
-void su_json_dot_set_enum(json_t * json, const char * key, const pair * pairs, int value)
+void su_json_dot_set_enum(json_t * json, const char * key, const su_enum_pair * pairs, int value)
 {
     json_object_set_new_nocheck(json, key, json_string(num2str(pairs, value, "")));
 }
@@ -184,7 +231,7 @@ void su_json_read_options(json_t * json, su_json_option_definition * options, vo
                 su_json_dot_get_string(json, options->key, *(char **) p, (char **) p);
                 break;
             default:
-                ERR("su_json_read_options: invalid option type %d", options->type);
+                g_warning("su_json_read_options: invalid option type %d", options->type);
         }
     }
 }
@@ -215,7 +262,7 @@ void su_json_write_options(json_t * json, su_json_option_definition * options, v
                 su_json_dot_set_string(json, options->key, *(char **) p);
                 break;
             default:
-                ERR("su_json_write_options: invalid option type %d", options->type);
+                g_warning("su_json_write_options: invalid option type %d", options->type);
         }
     }
 }
