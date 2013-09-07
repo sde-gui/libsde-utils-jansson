@@ -20,7 +20,7 @@
 #define __SDE_UTILS_JANSSON__UTILS_H
 
 #include <glib.h>
-#include <sde-utils-gtk-1.0/sde-utils-gtk.h>
+#include <sde-utils-gtk.h>
 #include <jansson.h>
 
 /******************************************************************************/

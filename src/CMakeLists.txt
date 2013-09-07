@@ -17,7 +17,7 @@ pkg_check_modules(sde-utils-gtk REQUIRED sde-utils-gtk-1.0>=0.1)
 
 add_definitions(
     ${gtk2_CFLAGS}
-    ${sde_utils_gtk_CFLAGS}
+    ${sde-utils-gtk_CFLAGS}
     ${glib2_CFLAGS}
     ${jansson_CFLAGS}
     ${sde-utils_CFLAGS}
@@ -25,7 +25,7 @@ add_definitions(
 
 link_directories(
     ${gtk2_LIBRARY_DIRS}
-    ${sde_utils_gtk_LIBRARY_DIRS}
+    ${sde-utils-gtk_LIBRARY_DIRS}
     ${glib2_LIBRARY_DIRS}
     ${jansson_LIBRARY_DIRS}
     ${sde_utils_LIBRARY_DIRS}
@@ -36,7 +36,7 @@ add_library(sde-utils-jansson-1.0 MODULE
 )
 
 target_link_libraries(sde-utils-jansson-1.0
-    ${sde_utils_gtk_LIBRARIES}
+    ${sde-utils-gtk_LIBRARIES}
     ${glib2_LIBRARIES}
     ${jansson_LIBRARIES}
     ${sde_utils_LIBRARIES}
