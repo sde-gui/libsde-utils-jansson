@@ -10,6 +10,6 @@ include(GNUInstallDirs)
 
 add_subdirectory(src)
 
-configure_file(sde-utils-jansson-1.0.pc.in sde-utils-jansson-1.0.pc @ONLY)
+configure_file(sde-utils-jansson-1.0.pc.in "${CMAKE_CURRENT_SOURCE_DIR}/sde-utils-jansson-1.0.pc" @ONLY)
 
 install(FILES sde-utils-jansson-1.0.pc DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
