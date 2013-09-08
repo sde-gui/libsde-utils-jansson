@@ -20,6 +20,7 @@
 #define __SDE_UTILS_JANSSON__UTILS_H
 
 #include <glib.h>
+#include <glib-object.h>
 #include <sde-utils-gtk.h>
 #include <jansson.h>
 
