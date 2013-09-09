@@ -12,7 +12,7 @@ pkg_check_modules(gtk2 REQUIRED gtk+-2.0>=2.24)
 pkg_check_modules(glib2 REQUIRED glib-2.0>=2.36)
 pkg_check_modules(jansson REQUIRED jansson>=2.4)
 pkg_check_modules(sde_utils REQUIRED sde-utils-1.0>=0.1)
-pkg_check_modules(sde-utils-gtk REQUIRED sde-utils-gtk-1.0>=0.1)
+pkg_check_modules(sde_utils_gtk REQUIRED sde-utils-gtk-1.0>=0.1)
 
 ##############################################################################
 
@@ -24,26 +24,26 @@ add_library(sde-utils-jansson-1.0 SHARED
 
 add_definitions(
     ${gtk2_CFLAGS}
-    ${sde-utils-gtk_CFLAGS}
     ${glib2_CFLAGS}
     ${jansson_CFLAGS}
-    ${sde-utils_CFLAGS}
+    ${sde_utils_CFLAGS}
+    ${sde_utils_gtk_CFLAGS}
 )
 
 link_directories(
     ${gtk2_LIBRARY_DIRS}
-    ${sde-utils-gtk_LIBRARY_DIRS}
     ${glib2_LIBRARY_DIRS}
     ${jansson_LIBRARY_DIRS}
     ${sde_utils_LIBRARY_DIRS}
+    ${sde_utils_gtk_LIBRARY_DIRS}
 )
 
 target_link_libraries(sde-utils-jansson-1.0
-    ${sde-utils-gtk_LIBRARIES}
     ${glib2_LIBRARIES}
     ${jansson_LIBRARIES}
-    ${sde_utils_LIBRARIES}
     ${gtk2_LIBRARIES}
+    ${sde_utils_LIBRARIES}
+    ${sde_utils_gtk_LIBRARIES}
 )
 
 ##############################################################################
