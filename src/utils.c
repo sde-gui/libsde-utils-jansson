@@ -221,7 +221,7 @@ void su_json_dot_set_rgba(json_t * json, const char * key, const GdkRGBA * value
 
 void su_json_dot_set_string(json_t * json, const char * key, const char * value)
 {
-    json_object_set_new_nocheck(json, key, json_string(value));
+    json_object_set_new_nocheck(json, key, json_string(value ? value : ""));
 }
 
 void su_json_read_options(json_t * json, su_json_option_definition * options, void * structure)
