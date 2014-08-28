@@ -16,12 +16,6 @@ pkg_check_modules(sde_utils_gtk REQUIRED sde-utils-gtk-1.0>=0.1)
 
 ##############################################################################
 
-add_library(sde-utils-jansson-1.0 SHARED
-    utils.c
-)
-
-##############################################################################
-
 add_definitions(
     ${gtk2_CFLAGS}
     ${glib2_CFLAGS}
@@ -36,6 +30,10 @@ link_directories(
     ${jansson_LIBRARY_DIRS}
     ${sde_utils_LIBRARY_DIRS}
     ${sde_utils_gtk_LIBRARY_DIRS}
+)
+
+add_library(sde-utils-jansson-1.0 SHARED
+    utils.c
 )
 
 target_link_libraries(sde-utils-jansson-1.0
