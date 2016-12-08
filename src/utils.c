@@ -20,6 +20,12 @@
 
 /********************************************************************/
 
+#if JANSSON_VERSION_HEX < 0x020400
+#define json_boolean(val)      ((val) ? json_true() : json_false())
+#endif
+
+/********************************************************************/
+
 static guint32 gcolor2rgb24(const GdkColor *color)
 {
     guint32 i;
