@@ -1,5 +1,5 @@
 AC_PREREQ(2.53)
-AC_INIT(libsde-utils-jansson-0, 0.1.0-alpha, http://make-linux.org/)
+AC_INIT(libsde-utils-jansson-0, 0.1.0-alpha, https://github.com/sde-gui/libsde-utils-jansson)
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE
 AM_MAINTAINER_MODE([enable])
