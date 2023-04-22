@@ -12,7 +12,8 @@
 /config.status
 /configure
 /libtool
-/sde-utils-0.pc
+/m4
+/sde-utils-jansson-0.pc
 /stamp-h1
 Makefile
 Makefile.in
